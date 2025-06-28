@@ -1,0 +1,139 @@
+{
+  "id": "demo-project",
+  "name": "Demo Landing Page",
+  "components": [
+    {
+      "id": "container-1",
+      "type": "container",
+      "props": {
+        "className": "p-8 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-lg shadow-lg"
+      },
+      "children": [
+        {
+          "id": "heading-1",
+          "type": "heading",
+          "props": {
+            "text": "Welcome to Our Platform",
+            "level": "h1",
+            "className": "text-4xl font-bold mb-4 text-center"
+          }
+        },
+        {
+          "id": "paragraph-1",
+          "type": "paragraph",
+          "props": {
+            "text": "Build amazing websites with our low-code platform. Drag, drop, and customize to create stunning pages in minutes.",
+            "className": "text-xl text-center mb-6"
+          }
+        },
+        {
+          "id": "button-1",
+          "type": "button",
+          "props": {
+            "text": "Get Started",
+            "variant": "primary",
+            "size": "large",
+            "className": "bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+          }
+        }
+      ]
+    },
+    {
+      "id": "container-2",
+      "type": "container",
+      "props": {
+        "className": "p-6 bg-white rounded-lg shadow-md mt-6"
+      },
+      "children": [
+        {
+          "id": "heading-2",
+          "type": "heading",
+          "props": {
+            "text": "Features",
+            "level": "h2",
+            "className": "text-2xl font-bold mb-4 text-gray-800"
+          }
+        },
+        {
+          "id": "card-1",
+          "type": "card",
+          "props": {
+            "title": "Easy to Use",
+            "content": "Intuitive drag and drop interface makes building websites simple and fun.",
+            "className": "bg-blue-50 rounded-lg p-4 mb-4"
+          }
+        },
+        {
+          "id": "card-2",
+          "type": "card",
+          "props": {
+            "title": "Export to Code",
+            "content": "Generate clean, production-ready Next.js code from your designs.",
+            "className": "bg-green-50 rounded-lg p-4 mb-4"
+          }
+        },
+        {
+          "id": "card-3",
+          "type": "card",
+          "props": {
+            "title": "Responsive Design",
+            "content": "All components are mobile-friendly and responsive by default.",
+            "className": "bg-purple-50 rounded-lg p-4"
+          }
+        }
+      ]
+    },
+    {
+      "id": "form-1",
+      "type": "form",
+      "props": {
+        "action": "/contact",
+        "method": "POST",
+        "className": "mt-6 p-6 bg-gray-50 rounded-lg"
+      },
+      "children": [
+        {
+          "id": "heading-3",
+          "type": "heading",
+          "props": {
+            "text": "Contact Us",
+            "level": "h3",
+            "className": "text-xl font-semibold mb-4"
+          }
+        },
+        {
+          "id": "input-1",
+          "type": "input",
+          "props": {
+            "type": "text",
+            "placeholder": "Your Name",
+            "name": "name"
+          }
+        },
+        {
+          "id": "input-2",
+          "type": "input",
+          "props": {
+            "type": "email",
+            "placeholder": "Your Email",
+            "name": "email"
+          }
+        },
+        {
+          "id": "button-2",
+          "type": "button",
+          "props": {
+            "text": "Send Message",
+            "variant": "primary",
+            "className": "w-full mt-4"
+          }
+        }
+      ]
+    }
+  ],
+  "metadata": {
+    "createdAt": "2024-01-01T00:00:00Z",
+    "updatedAt": "2024-01-01T00:00:00Z",
+    "version": "1.0.0"
+  }
+}

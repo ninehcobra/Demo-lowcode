@@ -1,0 +1,37 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: system-ui, sans-serif;
+  }
+}
+
+@layer components {
+  .drag-handle {
+    cursor: grab;
+  }
+
+  .drag-handle:active {
+    cursor: grabbing;
+  }
+
+  .component-preview {
+    border: 2px dashed #e5e7eb;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f9fafb;
+  }
+
+  .component-preview.drag-over {
+    border-color: #3b82f6;
+    background-color: #eff6ff;
+  }
+
+  .sidebar {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+}
