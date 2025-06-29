@@ -21,11 +21,15 @@ export const PropertyPanel: React.FC<PropertyPanelProps> = ({
 }) => {
   if (!selectedComponent) {
     return (
-      <div className="w-80 bg-gray-50 border-l border-gray-200 h-screen p-4">
-        <div className="text-center text-gray-500">
-          <div className="text-4xl mb-4">⚙️</div>
-          <h3 className="text-lg font-medium mb-2">Properties</h3>
-          <p className="text-sm">Select a component to edit its properties</p>
+      <div className="w-80 lg:w-96 xl:w-[420px] bg-gray-50 border-l border-gray-200 h-screen p-3 sm:p-4 flex flex-col">
+        <div className="text-center text-gray-500 flex-1 flex flex-col items-center justify-center">
+          <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">⚙️</div>
+          <h3 className="text-base sm:text-lg font-medium mb-2 leading-tight">
+            Properties
+          </h3>
+          <p className="text-xs sm:text-sm leading-relaxed">
+            Select a component to edit its properties
+          </p>
         </div>
       </div>
     );
@@ -35,9 +39,11 @@ export const PropertyPanel: React.FC<PropertyPanelProps> = ({
 
   if (!componentDefinition) {
     return (
-      <div className="w-80 bg-gray-50 border-l border-gray-200 h-screen p-4">
-        <div className="text-center text-gray-500">
-          <p>Unknown component type: {selectedComponent.type}</p>
+      <div className="w-80 lg:w-96 xl:w-[420px] bg-gray-50 border-l border-gray-200 h-screen p-3 sm:p-4 flex flex-col">
+        <div className="text-center text-gray-500 flex-1 flex flex-col items-center justify-center">
+          <p className="text-xs sm:text-sm leading-relaxed">
+            Unknown component type: {selectedComponent.type}
+          </p>
         </div>
       </div>
     );
@@ -163,18 +169,20 @@ export const PropertyPanel: React.FC<PropertyPanelProps> = ({
   };
 
   return (
-    <div className="w-80 bg-gray-50 border-l border-gray-200 h-screen overflow-y-auto">
-      <div className="p-4 border-b border-gray-200">
-        <h2 className="text-lg font-semibold text-gray-800">Properties</h2>
-        <p className="text-sm text-gray-600 mt-1">
+    <div className="w-80 lg:w-96 xl:w-[420px] bg-gray-50 border-l border-gray-200 h-screen overflow-y-auto flex flex-col">
+      <div className="p-4 border-b border-gray-200 flex-shrink-0">
+        <h2 className="text-lg font-semibold text-gray-800 leading-tight">
+          Properties
+        </h2>
+        <p className="text-sm text-gray-600 mt-1 leading-relaxed">
           {componentDefinition.name} ({selectedComponent.type})
         </p>
       </div>
 
-      <div className="p-4 space-y-4">
+      <div className="p-4 space-y-4 flex-1 overflow-y-auto">
         {componentDefinition.properties.map((property) => (
           <div key={property.name}>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-gray-700 mb-2 leading-tight">
               {property.label}
             </label>
             {renderPropertyInput(property)}
@@ -182,18 +190,20 @@ export const PropertyPanel: React.FC<PropertyPanelProps> = ({
         ))}
 
         {/* Component Actions */}
-        <div className="pt-4 border-t border-gray-200">
-          <h3 className="text-sm font-medium text-gray-700 mb-3">Actions</h3>
+        <div className="pt-4 border-t border-gray-200 flex-shrink-0">
+          <h3 className="text-sm font-medium text-gray-700 mb-3 leading-tight">
+            Actions
+          </h3>
           <div className="space-y-2">
             <button
               onClick={handleDelete}
-              className="w-full px-3 py-2 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-colors"
+              className="w-full px-3 py-2 text-sm bg-red-500 text-white rounded hover:bg-red-600 transition-colors font-medium"
             >
               🗑️ Delete Component
             </button>
             <button
               onClick={handleDuplicate}
-              className="w-full px-3 py-2 text-sm bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors"
+              className="w-full px-3 py-2 text-sm bg-gray-500 text-white rounded hover:bg-gray-600 transition-colors font-medium"
             >
               📋 Duplicate Component
             </button>

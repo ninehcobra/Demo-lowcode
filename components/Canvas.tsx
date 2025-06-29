@@ -96,53 +96,60 @@ export const Canvas: React.FC<CanvasProps> = ({
 
   return (
     <div className="flex-1 bg-gray-100 h-screen overflow-auto">
-      <div className="p-4">
-        <div className="max-w-4xl mx-auto">
+      <div className="p-2 sm:p-4 min-w-max">
+        <div className="max-w-6xl mx-auto">
           {/* Canvas Header */}
-          <div className="mb-6 bg-white rounded-lg shadow-sm p-4">
-            <div className="flex justify-between items-center">
-              <div>
-                <h1 className="text-2xl font-bold text-gray-800 mb-2">
+          <div className="mb-4 sm:mb-6 bg-white rounded-lg shadow-sm p-3 sm:p-4">
+            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-3 sm:gap-4">
+              <div className="flex-1 min-w-0">
+                <h1 className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-800 mb-1 sm:mb-2 leading-tight">
                   Low-Code Builder
                 </h1>
-                <p className="text-gray-600">
+                <p className="text-gray-600 text-xs sm:text-sm lg:text-base leading-relaxed">
                   Drag components from the sidebar to build your page
                 </p>
               </div>
-              <div className="flex space-x-2">
+              <div className="flex flex-wrap gap-1 sm:gap-2">
                 <button
                   onClick={onUndo}
                   disabled={!canUndo}
-                  className={`px-3 py-2 text-sm rounded transition-colors ${
+                  className={`px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm rounded transition-colors font-medium ${
                     canUndo
                       ? "bg-gray-500 text-white hover:bg-gray-600"
                       : "bg-gray-300 text-gray-500 cursor-not-allowed"
                   }`}
                   title="Undo (Ctrl+Z)"
                 >
-                  ↩ Undo
+                  <span className="hidden sm:inline">↩ Undo</span>
+                  <span className="sm:hidden">↩</span>
                 </button>
                 <button
                   onClick={onRedo}
                   disabled={!canRedo}
-                  className={`px-3 py-2 text-sm rounded transition-colors ${
+                  className={`px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm rounded transition-colors font-medium ${
                     canRedo
                       ? "bg-gray-500 text-white hover:bg-gray-600"
                       : "bg-gray-300 text-gray-500 cursor-not-allowed"
                   }`}
                   title="Redo (Ctrl+Y)"
                 >
-                  ↪ Redo
+                  <span className="hidden sm:inline">↪ Redo</span>
+                  <span className="sm:hidden">↪</span>
                 </button>
                 <button
                   onClick={() => setIsPreviewMode(!isPreviewMode)}
-                  className={`px-3 py-2 text-sm rounded transition-colors ${
+                  className={`px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm rounded transition-colors font-medium ${
                     isPreviewMode
                       ? "bg-blue-600 text-white"
                       : "bg-blue-500 text-white hover:bg-blue-600"
                   }`}
                 >
-                  {isPreviewMode ? "✏️ Edit" : "👀 Preview"}
+                  <span className="hidden sm:inline">
+                    {isPreviewMode ? "✏️ Edit" : "👀 Preview"}
+                  </span>
+                  <span className="sm:hidden">
+                    {isPreviewMode ? "✏️" : "👀"}
+                  </span>
                 </button>
               </div>
             </div>
@@ -150,7 +157,7 @@ export const Canvas: React.FC<CanvasProps> = ({
 
           {/* Main Canvas Area */}
           <div
-            className={`min-h-[600px] bg-white rounded-lg shadow-sm p-8 transition-all ${
+            className={`min-h-[400px] sm:min-h-[600px] bg-white rounded-lg shadow-sm p-3 sm:p-4 lg:p-8 transition-all ${
               isDragOver
                 ? "border-2 border-blue-400 bg-blue-50"
                 : "border-2 border-dashed border-gray-300"
@@ -161,17 +168,21 @@ export const Canvas: React.FC<CanvasProps> = ({
             onClick={handleCanvasClick}
           >
             {components.length === 0 ? (
-              <div className="flex flex-col items-center justify-center h-96 text-gray-500">
-                <div className="text-6xl mb-4">🎨</div>
-                <h3 className="text-xl font-medium mb-2">Empty Canvas</h3>
-                <p className="text-center max-w-md">
+              <div className="flex flex-col items-center justify-center h-64 sm:h-96 text-gray-500">
+                <div className="text-3xl sm:text-4xl lg:text-6xl mb-3 sm:mb-4">
+                  🎨
+                </div>
+                <h3 className="text-base sm:text-lg lg:text-xl font-medium mb-2 text-center leading-tight">
+                  Empty Canvas
+                </h3>
+                <p className="text-center max-w-md text-xs sm:text-sm lg:text-base leading-relaxed px-4">
                   Start building by dragging components from the sidebar to this
                   area. You can arrange, resize, and customize them to create
                   your perfect layout.
                 </p>
               </div>
             ) : (
-              <div className="space-y-4">
+              <div className="space-y-3 sm:space-y-4">
                 {components.map((component, index) => (
                   <div
                     key={component.id}
@@ -191,7 +202,7 @@ export const Canvas: React.FC<CanvasProps> = ({
                       isPreviewMode={isPreviewMode}
                     />
                     {!isPreviewMode && (
-                      <div className="absolute top-2 right-2 flex space-x-1 opacity-0 hover:opacity-100 transition-opacity">
+                      <div className="absolute top-1 sm:top-2 right-1 sm:right-2 flex space-x-1 opacity-0 hover:opacity-100 transition-opacity">
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
@@ -231,47 +242,56 @@ export const Canvas: React.FC<CanvasProps> = ({
           </div>
 
           {/* Canvas Footer */}
-          <div className="mt-6 bg-white rounded-lg shadow-sm p-4">
-            <div className="flex justify-between items-center">
-              <div className="text-sm text-gray-600">
+          <div className="mt-4 sm:mt-6 bg-white rounded-lg shadow-sm p-3 sm:p-4">
+            <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-3 sm:gap-4">
+              <div className="text-xs sm:text-sm text-gray-600 leading-relaxed">
                 {components.length} component
                 {components.length !== 1 ? "s" : ""} on canvas
                 {isPreviewMode && (
-                  <span className="ml-2 text-blue-600">• Preview Mode</span>
+                  <span className="ml-2 text-blue-600 font-medium">
+                    • Preview Mode
+                  </span>
                 )}
               </div>
-              <div className="flex space-x-2">
+              <div className="flex flex-wrap gap-1 sm:gap-2">
                 <button
                   onClick={onUndo}
                   disabled={!canUndo}
-                  className={`px-3 py-2 text-sm rounded transition-colors ${
+                  className={`px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm rounded transition-colors font-medium ${
                     canUndo
                       ? "bg-gray-500 text-white hover:bg-gray-600"
                       : "bg-gray-300 text-gray-500 cursor-not-allowed"
                   }`}
                 >
-                  Undo
+                  <span className="hidden sm:inline">Undo</span>
+                  <span className="sm:hidden">↩</span>
                 </button>
                 <button
                   onClick={onRedo}
                   disabled={!canRedo}
-                  className={`px-3 py-2 text-sm rounded transition-colors ${
+                  className={`px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm rounded transition-colors font-medium ${
                     canRedo
                       ? "bg-gray-500 text-white hover:bg-gray-600"
                       : "bg-gray-300 text-gray-500 cursor-not-allowed"
                   }`}
                 >
-                  Redo
+                  <span className="hidden sm:inline">Redo</span>
+                  <span className="sm:hidden">↪</span>
                 </button>
                 <button
                   onClick={() => setIsPreviewMode(!isPreviewMode)}
-                  className={`px-3 py-2 text-sm rounded transition-colors ${
+                  className={`px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-sm rounded transition-colors font-medium ${
                     isPreviewMode
                       ? "bg-blue-600 text-white"
                       : "bg-blue-500 text-white hover:bg-blue-600"
                   }`}
                 >
-                  {isPreviewMode ? "Edit" : "Preview"}
+                  <span className="hidden sm:inline">
+                    {isPreviewMode ? "Edit" : "Preview"}
+                  </span>
+                  <span className="sm:hidden">
+                    {isPreviewMode ? "✏️" : "👀"}
+                  </span>
                 </button>
               </div>
             </div>

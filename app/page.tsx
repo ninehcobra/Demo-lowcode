@@ -8,6 +8,7 @@ import { PropertyPanel } from "@/components/PropertyPanel";
 import { AIAssistantSettings } from "@/components/CodySettings";
 import { AIAssistant } from "@/components/CodyAssistant";
 import { AIAssistantConfig } from "@/lib/aiAssistantIntegration";
+import { LayoutWrapper, ResponsiveContainer } from "@/components/LayoutWrapper";
 
 export default function Home() {
   const [components, setComponents] = useState<ComponentConfig[]>([]);
@@ -222,39 +223,45 @@ export default function Home() {
   }, [selectedComponentId, historyIndex, history.length]);
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <LayoutWrapper>
       {/* Sidebar */}
-      <Sidebar
-        onComponentSelect={() => {}}
-        onClearCanvas={handleClearCanvas}
-        onExport={handleExport}
-        onOpenAIAssistant={() => setShowAIAssistant(true)}
-        onOpenAIAssistantSettings={() => setShowAIAssistantSettings(true)}
-        isAIAssistantConfigured={!!aiConfig}
-      />
+      <div className="flex-shrink-0">
+        <Sidebar
+          onComponentSelect={() => {}}
+          onClearCanvas={handleClearCanvas}
+          onExport={handleExport}
+          onOpenAIAssistant={() => setShowAIAssistant(true)}
+          onOpenAIAssistantSettings={() => setShowAIAssistantSettings(true)}
+          isAIAssistantConfigured={!!aiConfig}
+        />
+      </div>
 
       {/* Main Canvas */}
-      <Canvas
-        components={components}
-        onComponentsChange={updateComponents}
-        onComponentSelect={handleComponentSelect}
-        selectedComponentId={selectedComponentId}
-        onReorderComponents={handleReorderComponents}
-        onUndo={handleUndo}
-        onRedo={handleRedo}
-        canUndo={historyIndex > 0}
-        canRedo={historyIndex < history.length - 1}
-        onDeleteComponent={handleDeleteComponent}
-        onDuplicateComponent={handleDuplicateComponent}
-      />
+      <ResponsiveContainer>
+        <Canvas
+          components={components}
+          onComponentsChange={updateComponents}
+          onComponentSelect={handleComponentSelect}
+          selectedComponentId={selectedComponentId}
+          onReorderComponents={handleReorderComponents}
+          onUndo={handleUndo}
+          onRedo={handleRedo}
+          canUndo={historyIndex > 0}
+          canRedo={historyIndex < history.length - 1}
+          onDeleteComponent={handleDeleteComponent}
+          onDuplicateComponent={handleDuplicateComponent}
+        />
+      </ResponsiveContainer>
 
       {/* Property Panel */}
-      <PropertyPanel
-        selectedComponent={selectedComponent}
-        onPropertyChange={handlePropertyChange}
-        onDeleteComponent={handleDeleteComponent}
-        onDuplicateComponent={handleDuplicateComponent}
-      />
+      <div className="flex-shrink-0">
+        <PropertyPanel
+          selectedComponent={selectedComponent}
+          onPropertyChange={handlePropertyChange}
+          onDeleteComponent={handleDeleteComponent}
+          onDuplicateComponent={handleDuplicateComponent}
+        />
+      </div>
 
       {/* AI Assistant Settings Modal */}
       {showAIAssistantSettings && (
@@ -334,6 +341,6 @@ export default function Home() {
           </div>
         </div>
       )}
-    </div>
+    </LayoutWrapper>
   );
 }
