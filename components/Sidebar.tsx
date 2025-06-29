@@ -25,6 +25,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
 }) => {
   const [selectedCategory, setSelectedCategory] = useState<string>("Layout");
   const categories = getAllCategories();
+  const categoryTabsRef = React.useRef<HTMLDivElement>(null);
 
   const handleDragStart = (
     e: React.DragEvent,
@@ -55,6 +56,33 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
     setSelectedCategory(categories[newIndex]);
   };
+
+  // Auto-scroll to selected category tab
+  useEffect(() => {
+    if (categoryTabsRef.current) {
+      const container = categoryTabsRef.current;
+      const selectedTab = container.querySelector(
+        `[data-category="${selectedCategory}"]`
+      ) as HTMLElement;
+
+      if (selectedTab) {
+        const containerRect = container.getBoundingClientRect();
+        const tabRect = selectedTab.getBoundingClientRect();
+
+        // Check if the selected tab is outside the visible area
+        if (
+          tabRect.left < containerRect.left ||
+          tabRect.right > containerRect.right
+        ) {
+          selectedTab.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest",
+            inline: "center",
+          });
+        }
+      }
+    }
+  }, [selectedCategory]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -159,12 +187,16 @@ export const Sidebar: React.FC<SidebarProps> = ({
         </div>
 
         {/* Category Tabs with Icons */}
-        <div className="flex border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+        <div
+          ref={categoryTabsRef}
+          className="flex border border-gray-200 rounded-lg overflow-x-auto scrollbar-hide shadow-sm"
+        >
           {categories.map((category) => (
             <button
               key={category}
+              data-category={category}
               onClick={() => setSelectedCategory(category)}
-              className={`flex-1 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-1 category-tab ${
+              className={`flex-shrink-0 px-2 sm:px-3 py-2 text-xs sm:text-sm font-medium transition-all duration-200 flex items-center justify-center space-x-1 category-tab ${
                 selectedCategory === category
                   ? "text-blue-600 bg-blue-50 border-blue-200 shadow-sm active"
                   : "text-gray-600 hover:text-gray-800 hover:bg-gray-50 border-transparent"
