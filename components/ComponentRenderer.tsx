@@ -46,19 +46,37 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = ({
         );
 
       case "heading":
-        return <Heading {...component.props} />;
+        return (
+          <Heading
+            text={component.props.text || "Heading Text"}
+            level={component.props.level || "h1"}
+            className={component.props.className}
+          />
+        );
 
       case "paragraph":
-        return <Paragraph {...component.props} />;
+        return (
+          <Paragraph
+            text={component.props.text || "This is a paragraph of text."}
+            className={component.props.className}
+          />
+        );
 
       case "button":
-        return <Button {...component.props} />;
+        return (
+          <Button
+            text={component.props.text || "Click me"}
+            variant={component.props.variant}
+            size={component.props.size}
+            className={component.props.className}
+          />
+        );
 
       case "image":
         return (
           <img
-            src={component.props.src}
-            alt={component.props.alt}
+            src={component.props.src || "https://via.placeholder.com/400x300"}
+            alt={component.props.alt || "Image"}
             className={component.props.className}
           />
         );
@@ -67,9 +85,9 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = ({
         return (
           <div className={component.props.className}>
             <h3 className="text-lg font-semibold mb-2">
-              {component.props.title}
+              {component.props.title || "Card Title"}
             </h3>
-            <p>{component.props.content}</p>
+            <p>{component.props.content || "Card content goes here"}</p>
           </div>
         );
 
@@ -95,7 +113,7 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = ({
       case "input":
         return (
           <input
-            type={component.props.type}
+            type={component.props.type || "text"}
             placeholder={component.props.placeholder}
             name={component.props.name}
             className={component.props.className}
@@ -106,7 +124,7 @@ export const ComponentRenderer: React.FC<ComponentRendererProps> = ({
         return (
           <Label
             key={component.id}
-            text={component.props.text}
+            text={component.props.text || "Label"}
             htmlFor={component.props.htmlFor}
             className={component.props.className}
           />
