@@ -113,4 +113,33 @@
   .grid-responsive {
     @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4;
   }
+
+  /* Component animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .fade-in-up {
+    animation: fadeInUp 0.3s ease-out forwards;
+  }
+
+  /* Category navigation animations */
+  .category-tab {
+    @apply transition-all duration-200 ease-in-out;
+  }
+
+  .category-tab:hover {
+    @apply transform scale-105;
+  }
+
+  .category-tab.active {
+    @apply transform scale-105;
+  }
 }
